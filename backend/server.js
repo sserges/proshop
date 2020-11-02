@@ -6,8 +6,11 @@ import connectDB from './config/db.js';
 
 import productsRoutes from './routes/productRoutes.js';
 
+import { notFound, errorHandler } from './middlewares/errorMiddleware.js';
+
 dotenv.config();
 
+// Connection to the database
 connectDB();
 
 const app = express();
@@ -18,6 +21,12 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productsRoutes);
+
+// Not Found Handler
+app.use(notFound);
+
+// Error Handler
+app.use(errorHandler);
 
 app.listen(
   PORT,
