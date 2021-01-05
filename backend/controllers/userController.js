@@ -108,9 +108,10 @@ export const getUserProfile = asyncHandler(async (req, res) => {
 // @access  Private
 export const updateUserProfile = asyncHandler(async (req, res) => {
   const updateUserDataSchema = joi.object({
+    id: joi.string(),
     name: joi.string().trim(),
     email: joi.string().email().trim(),
-    password: joi.string().trim(),
+    password: joi.string().allow(''),
   })
 
   const result = updateUserDataSchema.validate(req.body)
